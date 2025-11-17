@@ -124,11 +124,7 @@ def openAcc(file='info.json',rash=True):
                     return user_in    
     else: 
         print("Пользователь не найден")
-        return -1
-def edit(user: str,info: dict):
-    data = read()
-    user = data[user]
-    print(user)    
+        return -1   
 def input_many(user):
     print("Сколько денег ввести(в рублях):")
     many = int(input(">>> "))
@@ -153,6 +149,3 @@ def look_info(user: str):
     data = (read())[user]
     for obj in data:
         print(f"{obj}: {derash(data[obj])}")
-edit_info("Andreys")
-input_many("Andreys")
-look_info("Andreys")
