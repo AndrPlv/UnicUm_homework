@@ -16,7 +16,7 @@ r'''
                     * * * * * * * * * *
 '''
 
-from random import randint,choice,seed
+from random import randint,choice
 
 def tre(y: int, sim_1="*",sim_0=" "):
     matrix = [[sim_0 for _ in range(y*2)] for _ in range(y)]
@@ -45,7 +45,7 @@ def beautiful(matrix: list):
     for j in range(len(matrix[0])):
         if matrix[1][j] == "*":
             matrix[0][j] = "&"            
-    n = randint(a=5, b=len(matrix)*150)
+    n = randint(a=5, b=len(matrix)*100)
     toys = []
     list_toy = list('@#$%&+?')
     for _ in range(n):
@@ -64,9 +64,19 @@ def beautiful(matrix: list):
     return matrix
             
 def printm(matrix:list,seps=' ',ends='\n'):
+    print('```')
     for j in matrix:
         print(*j, sep=seps, end=ends)
+    print("```")
+def write_file(matrix: list):
+    with open('tree.txt', 'w') as file:
+        file.write("```\n")
+        for j in matrix:
+            file.write(' '.join(j))
+            file.write('\n')
+        file.write('```')
 matrix = tre(15)
 matrix = gra(matrix)
 matrix = beautiful(matrix)
+#write_file(matrix)
 printm(matrix)
