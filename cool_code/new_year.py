@@ -92,7 +92,7 @@ m = None # кол-во игрушек, при None оно случайно
 
 
 matrix = tre(10, sim_1=sim_1, sim_0=sim_0) # создание ёлки
-matrix = gra(matrix, sim_1=sim_1, sim_0=sim_0) # растанровка границ
-matrix = beautiful(matrix=matrix,  m=120, list_toy=list_toy) # 
+matrix = gra(matrix, sim_1=sim_1, sim_0=sim_0) # расстанровка границ
+matrix = beautiful(matrix=matrix,  m=120, list_toy=list_toy) # расстановка ёлочных игрушек 
 '''write_file(matrix, sep=' ') # если хотите записать результат в файл''' 
 printm(matrix, seps=' ')
