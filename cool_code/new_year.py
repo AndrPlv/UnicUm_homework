@@ -31,10 +31,7 @@ def tre(y: int, sim_1="*",sim_0=" "):
     for j in range(len(matrix)-2, len(matrix)):
         strMat = matrix[j]
         space = y//2+3
-        print(space)
-        print(len(strMat) - space)
         for jss in range(space, len(strMat) - space+3):
-            print(0)
             strMat[jss-1] = sim_1                  
     return matrix
 def gra(matrix: list, sim_1="*",sim_0=" "):
