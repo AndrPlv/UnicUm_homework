@@ -1,38 +1,60 @@
 r'''
-                              &
-                            / & \
-                          / * @ & \
-                        / * $ @ ? & \
-                      / % $ # @ & # % \
-                    / * % ? * & + # @ % \
-                  / @ ? * * ? + $ @ @ & % \
-                / & + * * & $ % $ + % % # $ \
-              / # # ? & & & ? * * * ? ? @ + ? \
-            / * * @ & ? % @ ? % # @ + % ? @ & @ \
-          / * & % % @ # $ @ # $ & + & $ # + + ? # \
-        / @ # $ % & * * @ * @ % ? @ # % * @ # $ % @ \
-      / @ @ # + $ # @ % * @ + * % * * & # & # # + # $ \
-                    * * * * * * * * * *
-                    * * * * * * * * * *
+                    &                   
+                   /*\                  
+                  /$#*\                 
+                 /?****\                
+                  /***\                 
+                 /*****\                
+                /*******\               
+               /+**#$****\              
+                /*$***?*\               
+               /*********\              
+              /**********?\             
+             /********$*&**\            
+              /**********#\             
+             /****?********\            
+            /**%**&******?**\           
+           /****************+\          
+            /*****#********#\           
+           /****?************\          
+          /*+********#********\         
+         /*$*****?*?***&*******\        
+            *****************           
+            *****************           
 '''
 
+from math import ceil
 from random import randint,choice
 
-def tre(y: int, sim_1="*",sim_0=" "):
-    matrix = [[sim_0 for _ in range(y*2)] for _ in range(y)]
-
+def tree(matrix: list, sim='*'):
+    for j in range(len(matrix)-2, len(matrix)):
+        strMat = matrix[j]
+        space = (len(matrix)-2)//2+3
+        for jss in range(space, len(strMat) - space+3):
+            strMat[jss-1] = sim
+    return matrix     
+def tre1(y: int, sim_1="*",sim_0=" "):
+    matrix = [[sim_0 for _ in range(y*2)] for _ in range(y+2)]
     for j in range(0,len(matrix)-2):
         strMat = matrix[j]
         space = y-j
         for jss in range(space, len(strMat) - space):
             strMat[jss] = sim_1  
+                 
+    return matrix
+def tre2(y: int, module: int, sim_1="*", sim_0=" "):
+    matrix = [[sim_0 for _ in range(y*2)] for _ in range(y+2)]
+    hm = y // module 
+    step=2
+    for modul in range(1, module+1):
+        index_end_list = modul * hm
+        matrix_for_modul = matrix[index_end_list - hm:index_end_list]
+        for j in range(0,len(matrix_for_modul)):
+            strMat = matrix_for_modul[j]
+            space = y-j - modul*step+2
+            for jss in range(space, len(strMat) - space):
+                strMat[jss] = sim_1  
 
-    
-    for j in range(len(matrix)-2, len(matrix)):
-        strMat = matrix[j]
-        space = y//2+3
-        for jss in range(space, len(strMat) - space+3):
-            strMat[jss-1] = sim_1                  
     return matrix
 def gra(matrix: list, sim_1="*",sim_0=" "):
     for Mjs in range(1,len(matrix)-2):
@@ -68,11 +90,8 @@ def beautiful(matrix: list,list_toy: list, m=None):
     return matrix
             
 def printm(matrix:list,seps=' ',ends='\n'):
-    print("For Telegram")
-    print('```Python')
     for j in matrix:
         print(*j, sep=seps, end=ends)
-    print("```")
 
 def write_file(matrix: list, sep=' '):
     with open('tree.txt', 'w') as file:
@@ -87,9 +106,9 @@ sim_0 = ' ' # Пустое пространство
 list_toy = list('@#$%&+?') # Игрушки
 m = None # кол-во игрушек, при None оно случайно
 
-
-matrix = tre(10, sim_1=sim_1, sim_0=sim_0) # создание ёлки
-matrix = gra(matrix, sim_1=sim_1, sim_0=sim_0) # расстанровка границ
-matrix = beautiful(matrix=matrix,  m=120, list_toy=list_toy) # расстановка ёлочных игрушек 
-'''write_file(matrix, sep=' ') # если хотите записать результат в файл''' 
-printm(matrix, seps=' ')
+matrix = tre2(y=20,module=5, sim_1=sim_1, sim_0=sim_0) # создание ёлки
+matrix = tree(matrix, sim=sim_1) # ставим ёлку на ножку
+matrix = gra(matrix, sim_1=sim_1, sim_0=sim_0) # растанровка границ
+matrix = beautiful(matrix=matrix,  m=120, list_toy=list_toy) # растановка ёлочных игрушек''' 
+#write_file(matrix, sep='')
+printm(matrix)
