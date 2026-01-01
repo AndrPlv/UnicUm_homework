@@ -69,7 +69,12 @@ def beautiful(matrix: list,list_toy: list, m=None):
         if matrix[1][j] == "*":
             matrix[0][j] = "&"            
     if m is None:
-        n = randint(a=5, b=len(matrix)*100)
+        AC = len(matrix[0])
+        H = len(matrix)
+        S = AC*H//2
+        mins = int(S * 0.1)
+        maxs = int(S * 0.9)
+        n = randint(a=mins, b=S)
     else:
         n=m
     toys = []
@@ -86,12 +91,12 @@ def beautiful(matrix: list,list_toy: list, m=None):
                 continue
         else:
             continue
-    return matrix
-            
+    return matrix           
 def printm(matrix:list,seps=' ',ends='\n'):
+    print("```Python")
     for j in matrix:
         print(*j, sep=seps, end=ends)
-
+    print("```")
 def write_file(matrix: list, sep=' '):
     with open('tree.txt', 'w') as file:
         file.write("```Python\n")
@@ -100,14 +105,21 @@ def write_file(matrix: list, sep=' '):
             file.write('\n')
         file.write('```')
 
-sim_1 = '*' # Из чего ёлочка
+y = 10 # высота ёлочки
+sim_1 = '*' # Из чего состоит ёлочка
 sim_0 = ' ' # Пустое пространство
 list_toy = list('@#$%&+?') # Игрушки
 m = None # кол-во игрушек, при None оно случайно
+module = 2 # колл-во "ступениий" в ёлочке
 
-matrix = tre2(y=20,module=5, sim_1=sim_1, sim_0=sim_0) # создание ёлки
+if module == 1:
+    matrix = tre1(y=y, sim_1=sim_1, sim_0=sim_0) # создание ёлки
+elif module > 1:
+    matrix = tre2(y=y, module=module, sim_0=sim_0, sim_1=sim_1) # создание многоступенчатой ёлочки
+  
 matrix = tree(matrix, sim=sim_1) # ставим ёлку на ножку
 matrix = gra(matrix, sim_1=sim_1, sim_0=sim_0) # растанровка границ
-matrix = beautiful(matrix=matrix,  m=120, list_toy=list_toy) # растановка ёлочных игрушек''' 
+matrix = beautiful(matrix, list_toy, m) # расстановка ёлочных игрушек
+
 #write_file(matrix, sep='')
-printm(matrix)
+printm(matrix, seps='')
