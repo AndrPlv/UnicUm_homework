@@ -23,7 +23,6 @@ r'''
             *****************           
 '''
 
-from math import ceil
 from random import randint,choice
 
 def tree(matrix: list, sim='*'):
