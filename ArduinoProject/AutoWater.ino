@@ -74,7 +74,7 @@ void loop() {
     up(t,h,t_need,h_need);  
 
 
-    if ((t > t_need & h < h_need) || (h < h_need)) {
+    if (t > t_need or h < h_need) {
       water = 1;
     }
     else {
