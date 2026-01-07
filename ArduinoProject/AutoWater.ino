@@ -13,7 +13,7 @@ DHT dht(DHTPIN, DHTTYPE);
 LiquidCrystal_I2C lcd(0x27, 16, 2); // Адрес 0x27, дисплей 16x2
 bool water = 0;
 
-void up(int t,int h, int t_need, int h_need) {
+void update(int t,int h, int t_need, int h_need) {
   lcd.clear();
   lcd.setCursor(0, 0); // Установка курсора в 0-ю колонку, 0-ю строку
   lcd.print("T:"); // Печать первой строки
