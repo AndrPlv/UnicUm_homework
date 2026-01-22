@@ -64,7 +64,7 @@ void setup() {
 void loop() {
     if (sensor.read() == DHT_OK) {
          int t_need = map(analogRead(A0), 0, 1023, 0, 80);
-         int h_need = map(analogRead(A0), 0, 1023, 0, 10);
+         int h_need = map(analogRead(A1), 0, 1023, 0, 100);
 
          int t = sensor.tem;
          int h = sensor.hum;
@@ -72,7 +72,7 @@ void loop() {
          
          up(t,h,t_need,h_need);
 
-         if ((t > t_need) or (h < h_need)) {
+         if (t >= t_need or h <= h_need) {
               water = true;
          }   
          else {
@@ -81,11 +81,12 @@ void loop() {
     
     
         if (water) {
-          digitalWrite(SIG_POMP, HIGH);         
+          digitalWrite(SIG_POMP, HIGH);
+          delay(500);
+          digitalWrite(SIG_POMP, LOW);
           digitalWrite(POMP, HIGH);     
         }
         if (not(water)) {
-          digitalWrite(SIG_POMP, LOW);
           digitalWrite(POMP, LOW);
           digitalWrite(SYS, HIGH);
           delay(500);
