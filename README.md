@@ -1,3 +1,1 @@
-Hello, world!
-I am Unikum's student
-This is my homework
+Hello, user! This is repository for homework(
